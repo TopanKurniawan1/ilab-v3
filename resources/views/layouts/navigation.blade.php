@@ -4,84 +4,126 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
 
-            <!-- LEFT: Admin Menu Button -->
+            <!-- LEFT: Admin Floating Menu Button -->
             <div class="flex items-center">
 
                 @auth
                     @if(Auth::user()->role === 'admin')
+
                         <div class="relative">
 
-                            {{-- BUTTON (animated) --}}
-<button
-    @click="adminMenu = !adminMenu"
-    class="rounded-md 
-           bg-gray-100 dark:bg-gray-700 
-           text-gray-700 dark:text-gray-300
-           hover:bg-gray-200 dark:hover:bg-gray-600
-           border border-gray-300 dark:border-gray-600
-           shadow-sm transition
-           w-12 h-12 flex items-center justify-center">
+                            {{-- BUTTON (animated menu <-> close) --}}
+                            <button
+                                @click="adminMenu = !adminMenu"
+                                class="rounded-md 
+                                       bg-gray-100 dark:bg-gray-700 
+                                       text-gray-700 dark:text-gray-300
+                                       hover:bg-gray-200 dark:hover:bg-gray-600
+                                       border border-gray-300 dark:border-gray-600
+                                       shadow-sm transition
+                                       w-12 h-12 flex items-center justify-center">
 
-    <span class="relative w-7 h-7 flex items-center justify-center">
+                                <span class="relative w-7 h-7 flex items-center justify-center">
 
-        {{-- ICON MENU --}}
-        <span
-            class="material-icons-outlined absolute inset-0 flex items-center justify-center
-                   transition-opacity duration-150 text-3xl"
-            x-show="!adminMenu"
-            x-transition.opacity
-            x-cloak>
-            menu
-        </span>
+                                    {{-- ICON MENU --}}
+                                    <span
+                                        class="material-icons-outlined absolute inset-0 flex items-center justify-center
+                                               transition-opacity duration-150 text-3xl"
+                                        x-show="!adminMenu"
+                                        x-transition.opacity
+                                        x-cloak>
+                                        menu
+                                    </span>
 
-        {{-- ICON CLOSE --}}
-        <span
-            class="material-icons-outlined absolute inset-0 flex items-center justify-center
-                   transition-opacity duration-150 text-3xl"
-            x-show="adminMenu"
-            x-transition.opacity
-            x-cloak>
-            close
-        </span>
+                                    {{-- ICON CLOSE --}}
+                                    <span
+                                        class="material-icons-outlined absolute inset-0 flex items-center justify-center
+                                               transition-opacity duration-150 text-3xl"
+                                        x-show="adminMenu"
+                                        x-transition.opacity
+                                        x-cloak>
+                                        close
+                                    </span>
 
-    </span>
+                                </span>
 
-</button>
+                            </button>
+
                             {{-- FLOATING ADMIN MENU --}}
                             <div
                                 x-show="adminMenu"
                                 @click.outside="adminMenu = false"
                                 x-transition
-                                        class="fixed left-4 mt-2 w-[320px]
+                                x-cloak
+                                class="fixed left-4 mt-2 w-[320px]
                                        bg-white dark:bg-gray-800 
-                                       rounded-lg shadow-xl border
-                                       border-gray-200 dark:border-gray-700
-                                       z-50">
+                                       rounded-lg shadow-xl 
+                                       border border-gray-200 dark:border-gray-700 
+                                       z-50 overflow-hidden">
 
+                                {{-- TITLE --}}
+                                <div class="px-4 py-3 font-semibold 
+                                            text-gray-800 dark:text-gray-200
+                                            border-b border-gray-200 dark:border-gray-700">
+                                    Menu Admin
+                                </div>
+
+                                {{-- ADMIN MENU ITEMS --}}
                                 <div class="py-2 text-gray-700 dark:text-gray-300">
 
+                                    {{-- Dashboard --}}
                                     <a href="{{ route('dashboard') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                       class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <span class="material-icons-outlined mr-2">dashboard</span>
                                         Dashboard
                                     </a>
 
+                                    {{-- Jurusan --}}
                                     <a href="{{ route('admin.majors.index') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                       class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <span class="material-icons-outlined mr-2">category</span>
                                         Jurusan
                                     </a>
 
-                                    <a href="#"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    {{-- Tingkatan --}}
+                                    <a href="{{ route('admin.grades.index') }}"
+                                       class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <span class="material-icons-outlined mr-2">stairs</span>
+                                        Tingkatan
+                                    </a>
+
+                                    {{-- Rombel --}}
+                                    <a href="{{ route('admin.class-groups.index') }}"
+                                       class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <span class="material-icons-outlined mr-2">groups</span>
+                                        Rombel
+                                    </a>
+
+                                    {{-- Ruangan / Lab --}}
+                                    <a href="{{ route('admin.rooms.index') }}"
+                                       class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <span class="material-icons-outlined mr-2">door_front</span>
+                                        Ruangan / Lab
+                                    </a>
+
+                                    {{-- Guru --}}
+                                    <a href="{{ route('admin.teachers.index') }}"
+                                       class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <span class="material-icons-outlined mr-2">school</span>
                                         Guru
                                     </a>
 
-                                    <a href="#"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    {{-- Mapel --}}
+                                    <a href="{{ route('admin.subjects.index') }}"
+                                       class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <span class="material-icons-outlined mr-2">library_books</span>
                                         Mapel
                                     </a>
 
-                                    <a href="#"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    {{-- Jadwal --}}
+                                    <a href="{{ route('admin.schedules.index') }}"
+                                       class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <span class="material-icons-outlined mr-2">schedule</span>
                                         Jadwal Lab
                                     </a>
 
@@ -90,12 +132,13 @@
                             </div>
 
                         </div>
+
                     @endif
                 @endauth
 
             </div>
 
-            <!-- RIGHT: Default Breeze User Dropdown -->
+            <!-- RIGHT: Breeze User Dropdown -->
             <div class="hidden sm:flex sm:items-center">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">

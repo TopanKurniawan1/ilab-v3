@@ -40,13 +40,15 @@
         {{-- TOGGLE SIDEBAR BUTTON for MOBILE --}}
         @include('layouts.navigation')
 
-        @isset($header)
-            <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endisset
+@isset($header)
+    <header class="bg-white dark:bg-gray-800 shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="text-gray-100 text-xl font-semibold">
+                {{ $header }}
+            </div>
+        </div>
+    </header>
+@endisset
 
         <main class="flex-1 py-6">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

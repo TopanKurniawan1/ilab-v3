@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClassGroup extends Model
 {
-    protected $fillable = ['grade_id', 'major_id', 'name'];
+    protected $fillable = [
+        'grade_id',
+        'major_id',
+        'name',
+    ];
 
     public function grade()
     {
@@ -16,10 +20,5 @@ class ClassGroup extends Model
     public function major()
     {
         return $this->belongsTo(Major::class);
-    }
-
-    public function schedules()
-    {
-        return $this->hasMany(Schedule::class);
     }
 }

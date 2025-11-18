@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    protected $fillable = ['name', 'code', 'capacity'];
-
-    public function schedules()
-    {
-        return $this->hasMany(Schedule::class);
-    }
+    protected $fillable = [
+        'name',
+        'code',
+        'capacity',
+        'location',
+        'description',
+    ];
 }
